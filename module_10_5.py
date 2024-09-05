@@ -1,4 +1,4 @@
-import multiprocessing
+from multiprocessing import Pool
 from datetime import datetime
 
 
@@ -10,6 +10,7 @@ def read_info(name):
             all_data.append(line)
             if not line:
                 break
+            all_data.append(line)
 
 
 files = ['file 1.txt', 'file 2.txt', 'file 3.txt', 'file 4.txt']
@@ -22,8 +23,8 @@ end1 = datetime.now()
 print(f'{end1 - start1} (линейный)')
 
 if __name__ == '__main__':
-    with multiprocessing.Pool(processes=4) as pool:
-        start2 = datetime.now()
+    start2 = datetime.now()
+    with Pool(processes=len(files)) as pool:
         pool.map(read_info, files)
 
     end2 = datetime.now()
